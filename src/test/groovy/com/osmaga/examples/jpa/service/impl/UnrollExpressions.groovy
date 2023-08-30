@@ -63,7 +63,7 @@ class UnrollExpressions extends Specification {
 
     // Using expressions without changing test name
     @Unroll("#student.career with due date #student.dueDate should have a fee of #expectedFee")
-    def "Should return expected fee using objects in data table"() {
+    def "Should return expected fee using objects in data table - unrolling"() {
         when:
         def fee = subject.getSemesterFee(student)
 

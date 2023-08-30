@@ -1,8 +1,6 @@
 package com.osmaga.examples.jpa.service.impl
 
 import com.osmaga.examples.jpa.constants.Career
-import com.osmaga.examples.jpa.constants.ErrorCode
-import com.osmaga.examples.jpa.exceptions.BadRequestException
 import com.osmaga.examples.jpa.model.Student
 import com.osmaga.examples.jpa.repository.StudentRepository
 import com.osmaga.examples.jpa.service.utils.TestConstants
@@ -11,7 +9,6 @@ import com.osmaga.examples.jpa.util.CostsUtil
 import com.osmaga.examples.jpa.util.TrackingUtils
 import spock.lang.Specification
 import spock.lang.Subject
-import spock.lang.Unroll
 
 class MockConstraints extends Specification {
 
@@ -105,6 +102,8 @@ class MockConstraints extends Specification {
         1 * studentRepository.save({
             it.career == newCareer
             it.semesterFee > 0
+            it.discountFee == TestConstants.DEFAULT_DISCOUNT_FEE * 0.5
+            it.semesterFee == TestConstants.DEFAULT_LAWYER_FEE - it.discountFee
             it.dueDate == student.dueDate
         })
     }
