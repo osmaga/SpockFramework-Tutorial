@@ -1,7 +1,9 @@
 package com.osmaga.examples.jpa.service.impl;
 
 import com.osmaga.examples.jpa.constants.Country;
+import com.osmaga.examples.jpa.constants.ErrorCode;
 import com.osmaga.examples.jpa.constants.Subject;
+import com.osmaga.examples.jpa.exceptions.BadRequestException;
 import com.osmaga.examples.jpa.exceptions.TeacherAddressNotFoundException;
 import com.osmaga.examples.jpa.exceptions.TeacherNotFoundException;
 import com.osmaga.examples.jpa.model.Address;
@@ -30,15 +32,16 @@ public class TeacherServiceImpl implements TeacherService {
 
     private final TrackingUtils trackingUtils;
 
-    public Teacher updateTeacherSubjects(long teacherId, Collection<Subject> subjectsTaught) {
+    public Teacher updateTeacherSubjects(Long teacherId, Collection<Subject> subjectsTaught) {
         log.info("updating {}", trackingUtils.getCurrentTraceId());
-        Teacher teacherToUpdate = teacherRepository.findById(teacherId).orElseThrow(TeacherNotFoundException::new);
 
-        if (subjectsTaught != null) {
+        if (subjectsTaught != null && !subjectsTaught.isEmpty() && teacherId != null) {
+            Teacher teacherToUpdate = teacherRepository.findById(teacherId).orElseThrow(TeacherNotFoundException::new);
             teacherToUpdate.setSubjectsTaught(subjectsTaught);
+            return teacherRepository.save(teacherToUpdate);
+        } else {
+            throw new BadRequestException(ErrorCode.SUBJECTS_EMPTY);
         }
-
-        return teacherRepository.save(teacherToUpdate);
     }
 
     @Override

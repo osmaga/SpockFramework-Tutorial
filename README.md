@@ -9,11 +9,10 @@ Order to follow:
 5. [Mock Constraints](src/test/groovy/com/osmaga/examples/jpa/service/impl/MockConstraints.groovy)
 6. [Mock Cardinality](src/test/groovy/com/osmaga/examples/jpa/service/impl/MockCardinality.groovy)
 7. [Stubs](src/test/groovy/com/osmaga/examples/jpa/service/impl/Stubs.groovy)
-8. Spies
-9. Data pipes
-10. Static Methods
-11. Blocking variables and async methods
-12. Log testing
-13. Coverage (jacoco & IDE)
-14. Testing Controllers
-15. Testing Aspects
+8. [Data pipes](src/test/groovy/com/osmaga/examples/jpa/service/impl/DataPipes.groovy)
+9. Static Methods
+10. Blocking variables and async methods
+11. Log testing
+12. Coverage (jacoco & IDE)
+13. Testing Controllers
+14. Testing Aspects
