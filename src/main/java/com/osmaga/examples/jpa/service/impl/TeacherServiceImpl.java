@@ -11,15 +11,15 @@ import com.osmaga.examples.jpa.model.Teacher;
 import com.osmaga.examples.jpa.repository.AddressRepository;
 import com.osmaga.examples.jpa.repository.TeacherRepository;
 import com.osmaga.examples.jpa.service.TeacherService;
+import com.osmaga.examples.jpa.util.CountryUtil;
 import com.osmaga.examples.jpa.util.TrackingUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -56,5 +56,42 @@ public class TeacherServiceImpl implements TeacherService {
             }
         }
         return addresses;
+    }
+
+    @Override
+    public Map<Country, List<Teacher>> getTeachersByCountry() {
+        Map<Country, List<Teacher>> result = new HashMap<>();
+        List<String> countriesList = CountryUtil.getCountriesList();
+        List<Country> countries = countriesList
+                .stream()
+                .map(Country::valueOf)
+                .collect(Collectors.toList());
+
+        countries.forEach(country -> {
+                List<Teacher> teachers = teacherRepository.findByCountry(country);
+                result.put(country, teachers);
+        });
+
+        return result;
+    }
+
+    public Map<Country, List<Teacher>> getTeachersByCountry2() {
+        Map<Country, List<Teacher>> result = new HashMap<>();
+        List<String> countriesList = getCountriesList();
+        List<Country> countries = countriesList
+                .stream()
+                .map(Country::valueOf)
+                .collect(Collectors.toList());
+
+        countries.forEach(country -> {
+            List<Teacher> teachers = teacherRepository.findByCountry(country);
+            result.put(country, teachers);
+        });
+
+        return result;
+    }
+
+    public List<String> getCountriesList() {
+        return CountryUtil.getCountriesList();
     }
 }

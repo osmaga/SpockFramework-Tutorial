@@ -10,7 +10,7 @@ Order to follow:
 6. [Mock Cardinality](src/test/groovy/com/osmaga/examples/jpa/service/impl/MockCardinality.groovy)
 7. [Stubs](src/test/groovy/com/osmaga/examples/jpa/service/impl/Stubs.groovy)
 8. [Data pipes](src/test/groovy/com/osmaga/examples/jpa/service/impl/DataPipes.groovy)
-9. Static Methods
+9. [Static Methods](src/test/groovy/com/osmaga/examples/jpa/service/impl/StaticMethods.groovy)
 10. Blocking variables and async methods
 11. Log testing
 12. Coverage (jacoco & IDE)
